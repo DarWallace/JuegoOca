@@ -2,6 +2,7 @@ package es.studium.es;
 
 import java.awt.Button;
 import java.awt.Choice;
+import java.awt.Dialog;
 import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.GridLayout;
@@ -20,6 +21,8 @@ public class InicioPartida extends Frame
 	Image imagenFondo;
 	// Declarar el objeto Toolkit para manejo de imágenes
 	Toolkit herramienta;
+	int numJugadores = 0; // Guarda el número de jugadores
+	String[] nombresJugadores = null; // Guarda los nombres de los jugadores
 	Label lblJugador1 = new Label("Jugador1:");
 	TextField txtNombreJ1 = new TextField("Nombre1",20);
 	Choice choiceColorJ1 = new Choice();
@@ -42,7 +45,7 @@ public class InicioPartida extends Frame
 	
 	Button btnAceptar = new Button("Jugar");
 	Button btnAtras = new Button("<--");
-	private int numJugadores;
+	
 	public InicioPartida(int numJugadores) {
 		
 		setTitle("Selección de jugadores (" + numJugadores + " jugadores)");
@@ -127,6 +130,9 @@ public class InicioPartida extends Frame
 		
 		setVisible(true);
 	}
+	
+
+	
 	public int getNumJugadores() {
 		return numJugadores;
 	}
