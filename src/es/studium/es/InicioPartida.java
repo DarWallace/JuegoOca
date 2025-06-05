@@ -10,7 +10,7 @@ public class InicioPartida extends JFrame
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int numJugadores = 0;
+	 int numJugadores = 0;
 
     private JLabel lblJugador1 = new JLabel("Jugador1:");
     private JTextField txtNombreJ1 = new JTextField("Nombre1", 20);
@@ -34,7 +34,7 @@ public class InicioPartida extends JFrame
  
     public InicioPartida(int numJugadores)
     {
-        this.numJugadores = numJugadores;
+       
         setTitle("Selección de jugadores (" + numJugadores + " jugadores)");
         setSize(500, 300);
         setResizable(false);
@@ -64,7 +64,7 @@ public class InicioPartida extends JFrame
         panel.add(btnAtras, c);
         c.gridx = 1;
         panel.add(new JLabel(""), c);
-
+        
         // Jugador 1
         c.gridy = 1; c.gridx = 0;
         panel.add(lblJugador1, c);
@@ -80,7 +80,7 @@ public class InicioPartida extends JFrame
         panel.add(txtNombreJ2, c);
         c.gridx = 2;
         panel.add(choiceColorJ2, c);
-        
+        if (numJugadores ==3) {
         // Jugador 3
         c.gridy = 3; c.gridx = 0;
         panel.add(lblJugador3, c);
@@ -88,7 +88,8 @@ public class InicioPartida extends JFrame
         panel.add(txtNombreJ3, c);
         c.gridx = 2;
         panel.add(choiceColorJ3, c);
-        
+        }
+        if (numJugadores ==4) {
         // Jugador 4
         c.gridy = 4; c.gridx = 0;
         panel.add(lblJugador4, c);
@@ -96,7 +97,7 @@ public class InicioPartida extends JFrame
         panel.add(txtNombreJ4, c);
         c.gridx = 2;
         panel.add(choiceColorJ4, c);
-
+        }
         // Botón Jugar
         c.gridy = 5; c.gridx = 1;
         panel.add(btnAceptar, c);
@@ -114,4 +115,8 @@ public class InicioPartida extends JFrame
     public String getColorJugador2() { return (String) choiceColorJ2.getSelectedItem(); }
     public String getColorJugador3() { return (String) choiceColorJ3.getSelectedItem(); }
     public String getColorJugador4() { return (String) choiceColorJ4.getSelectedItem(); }
+ public static void main(String[] args)
+{
+	new InicioPartida(3);
+}   
 }
