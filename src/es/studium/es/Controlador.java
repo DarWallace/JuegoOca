@@ -2,168 +2,85 @@ package es.studium.es;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.WindowEvent; // Para cerrar la ventana
-import java.awt.event.WindowListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-public class Controlador implements WindowListener, ActionListener, MouseListener
+public class Controlador extends WindowAdapter implements ActionListener
 {
-	Vista vista;
-	ModeloT modelo;
+    Vista vista;
+    ModeloT modelo;
+    InicioPartida inicioPartida;
+    // Puedes declarar aquí la referencia al tablero o lo que uses después
 
-	int numJugadores = 2;
-	VistaRanking vistaRanking = new VistaRanking(); // Top Ten
-	InicioPartida vistaInicioPartida = new InicioPartida(numJugadores); // Partida Nueva
-	VistaTablero tablero; // Tablero
-	int turno = 1;
-	int tirada;
-	int tiradasRojo = 0;
-	int tiradasRosa = 0;
-	int tiradasVerde = 0;
-	int tiradasAzul = 0;
+    public Controlador(Vista vista, ModeloT modelo)
+    {
+        this.vista = vista;
+        this.modelo = modelo;
+        // Listeners para la ventana principal
+        vista.addWindowListener(this);
+        vista.btnPartidaNueva.addActionListener(this);
+        vista.btnRanking.addActionListener(this);
+        // Puedes añadir más listeners aquí si tienes más botones
+    }
 
-	// Constructor que recibe la vista
-	public Controlador(Vista v, ModeloT m)
-	{
-		this.vista = v;
-		this.modelo = m;
+    @Override
+    public void actionPerformed(ActionEvent e)
+    {
+        // Cuando el usuario pulsa "Partida Nueva"
+        if(e.getSource() == vista.btnPartidaNueva)
+        {
+            // Por defecto lanzamos para 2 jugadores; aquí podrías pedir el número antes
+            inicioPartida = new InicioPartida(2); // O el número que elijas
+            inicioPartida.btnAceptar.addActionListener(this);
+            inicioPartida.btnAtras.addActionListener(this);
+            vista.setVisible(false);
+        }
 
-		vista.addWindowListener(this);
-		vista.btnRanking.addActionListener(this); // Top Ten
-		vista.btnPartidaNueva.addActionListener(this); // Partida Nueva
+        // Cuando el usuario pulsa "Atrás" en InicioPartida
+        else if(inicioPartida != null && e.getSource() == inicioPartida.btnAtras)
+        {
+            inicioPartida.setVisible(false);
+            vista.setVisible(true);
+        }
 
-	}
+        // Cuando el usuario pulsa "Jugar" en InicioPartida
+        else if(inicioPartida != null && e.getSource() == inicioPartida.btnAceptar)
+        {
+            int numJugadores = inicioPartida.getNumJugadores();
+            String[] nombres = new String[numJugadores];
+            String[] colores = new String[numJugadores];
 
-	@Override
-	public void actionPerformed(ActionEvent e)
-	{
+            // Recoger los nombres y colores seleccionados según el número de jugadores
+            if(numJugadores >= 1) {
+                nombres[0] = inicioPartida.getNombreJugador1();
+                colores[0] = inicioPartida.getColorJugador1();
+            }
+            if(numJugadores >= 2) {
+                nombres[1] = inicioPartida.getNombreJugador2();
+                colores[1] = inicioPartida.getColorJugador2();
+            }
+            if(numJugadores >= 3) {
+                nombres[2] = inicioPartida.getNombreJugador3();
+                colores[2] = inicioPartida.getColorJugador3();
+            }
+            if(numJugadores == 4) {
+                nombres[3] = inicioPartida.getNombreJugador4();
+                colores[3] = inicioPartida.getColorJugador4();
+            }
 
-		if (e.getSource() == vista.btnPartidaNueva)
-		{
-			vista.setVisible(false);
-			vistaInicioPartida.setVisible(true);
-		} else if (e.getSource() == vistaInicioPartida.btnAceptar)
-		{
-			int numJugadores = vistaInicioPartida.getNumJugadores();
-			tablero = new VistaTablero(numJugadores);
-			vistaInicioPartida.setVisible(false);
-			tablero.setVisible(true);
-		}
+            // Aquí puedes usar los datos para inicializar la partida, el modelo, etc.
+            // Ejemplo: modelo.iniciarPartida(nombres, colores);
 
-		if (e.getSource() == vistaInicioPartida.btnAceptar)
-		{
-			System.out.println("Botón Jugar presionado.");
+            // Cierra la pantalla de inicio de partida y abre la pantalla del juego
+            inicioPartida.setVisible(false);
+            // Aquí deberías crear y mostrar tu tablero o la siguiente vista
+            // Ejemplo: new VistaTablero(nombres, colores);
+        }
+    }
 
-			// Solo si hay 2 o más jugadores:
-			if (vistaInicioPartida.getNumJugadores() >= 2)
-			{
-
-			}
-			// Solo si hay 3 o más jugadores:
-			if (vistaInicioPartida.getNumJugadores() >= 3)
-			{
-
-			}
-			// Solo si hay 4 jugadores:
-			if (vistaInicioPartida.getNumJugadores() == 4)
-			{
-
-			}
-
-			// Opcional: ocultar la vista actual o pasar a la siguiente vista
-			// vista.dispose(); // Cierra la ventana actual
-			// new OtraVistaDelJuego(); // Abre la siguiente vista
-		} else if (e.getSource() == vistaInicioPartida.btnAtras)
-		{
-			System.out.println("Botón Atrás presionado.");
-			// Aquí iría la lógica para volver a la pantalla anterior
-			vista.dispose(); // Cierra la ventana actual
-			// new PantallaAnterior(); // Volver a la pantalla anterior
-		}
-	}
-
-	@Override
-	public void windowOpened(WindowEvent e)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void windowClosing(WindowEvent e)
-	{
-		System.exit(0);
-
-	}
-
-	@Override
-	public void windowClosed(WindowEvent e)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void windowIconified(WindowEvent e)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void windowDeiconified(WindowEvent e)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void windowActivated(WindowEvent e)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void windowDeactivated(WindowEvent e)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e)
-	{
-		// TODO Auto-generated method stub
-
-	}
+    @Override
+    public void windowClosing(WindowEvent e)
+    {
+        System.exit(0);
+    }
 }
