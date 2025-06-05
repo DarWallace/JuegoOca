@@ -2,6 +2,8 @@ package es.studium.es;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 public class Controlador implements ActionListener
 {
@@ -16,6 +18,7 @@ public class Controlador implements ActionListener
 
         vista.btnPartidaNueva.addActionListener(this);
         vista.btnRanking.addActionListener(this);
+        vista.btnAyuda.addActionListener(this);
     }
 
     @Override
@@ -23,15 +26,13 @@ public class Controlador implements ActionListener
     {
         if(e.getSource() == vista.btnPartidaNueva)
         {
-            inicioPartida = new InicioPartida(4); // Cambia el número si quieres más jugadores
-            inicioPartida.btnAceptar.addActionListener(this);
-            inicioPartida.btnAtras.addActionListener(this);
-            vista.setVisible(false);
+            new SeleccionJugadores(); // Cambia el número si quieres más jugadores
+            vista.frame.setVisible(false);
         }
         else if(inicioPartida != null && e.getSource() == inicioPartida.btnAtras)
         {
             inicioPartida.dispose();
-            vista.setVisible(true);
+            vista.frame.setVisible(true);
         }
         else if(inicioPartida != null && e.getSource() == inicioPartida.btnAceptar)
         {
@@ -55,7 +56,7 @@ public class Controlador implements ActionListener
             }
 
             inicioPartida.dispose();
-            vista.setVisible(true);
+            
         }
     }
 }
