@@ -2,55 +2,56 @@ package es.studium.es;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
-public class Controlador extends WindowAdapter implements ActionListener
+import javax.swing.JFrame;
+
+public class Controlador implements ActionListener,WindowListener
 {
     Vista vista;
     ModeloT modelo;
     InicioPartida inicioPartida;
-    // Puedes declarar aquí la referencia al tablero o lo que uses después
 
-    public Controlador(Vista vista, ModeloT modelo)
+    public Controlador(Vista v, ModeloT m)
     {
-        this.vista = vista;
-        this.modelo = modelo;
-        // Listeners para la ventana principal
+        this.vista = v;
+        this.modelo = m;
+
+        vista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         vista.addWindowListener(this);
         vista.btnPartidaNueva.addActionListener(this);
         vista.btnRanking.addActionListener(this);
-        // Puedes añadir más listeners aquí si tienes más botones
+        // ... otros listeners de Vista si los tienes
     }
 
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        // Cuando el usuario pulsa "Partida Nueva"
+        // Botón para comenzar nueva partida
         if(e.getSource() == vista.btnPartidaNueva)
         {
-            // Por defecto lanzamos para 2 jugadores; aquí podrías pedir el número antes
-            inicioPartida = new InicioPartida(2); // O el número que elijas
+            // Por defecto para 2 jugadores (puedes pedir al usuario cuántos)
+            inicioPartida = new InicioPartida(2);
             inicioPartida.btnAceptar.addActionListener(this);
             inicioPartida.btnAtras.addActionListener(this);
             vista.setVisible(false);
         }
 
-        // Cuando el usuario pulsa "Atrás" en InicioPartida
+        // Botón para volver atrás desde la selección de jugadores
         else if(inicioPartida != null && e.getSource() == inicioPartida.btnAtras)
         {
-            inicioPartida.setVisible(false);
+            inicioPartida.dispose();
             vista.setVisible(true);
         }
 
-        // Cuando el usuario pulsa "Jugar" en InicioPartida
+        // Botón para aceptar y empezar la partida
         else if(inicioPartida != null && e.getSource() == inicioPartida.btnAceptar)
         {
             int numJugadores = inicioPartida.getNumJugadores();
             String[] nombres = new String[numJugadores];
             String[] colores = new String[numJugadores];
 
-            // Recoger los nombres y colores seleccionados según el número de jugadores
             if(numJugadores >= 1) {
                 nombres[0] = inicioPartida.getNombreJugador1();
                 colores[0] = inicioPartida.getColorJugador1();
@@ -68,19 +69,64 @@ public class Controlador extends WindowAdapter implements ActionListener
                 colores[3] = inicioPartida.getColorJugador4();
             }
 
-            // Aquí puedes usar los datos para inicializar la partida, el modelo, etc.
-            // Ejemplo: modelo.iniciarPartida(nombres, colores);
+            // Aquí puedes pasar los datos al modelo o abrir el tablero:
+            // modelo.iniciarPartida(nombres, colores);
 
-            // Cierra la pantalla de inicio de partida y abre la pantalla del juego
-            inicioPartida.setVisible(false);
-            // Aquí deberías crear y mostrar tu tablero o la siguiente vista
-            // Ejemplo: new VistaTablero(nombres, colores);
+            inicioPartida.dispose();
+            // Aquí podrías abrir la ventana del tablero, por ejemplo:
+            // new VistaTablero(nombres, colores);
+
+            // Por ahora, volvemos a la ventana principal
+            vista.setVisible(true);
         }
     }
 
-    @Override
-    public void windowClosing(WindowEvent e)
-    {
-        System.exit(0);
-    }
+	@Override
+	public void windowOpened(WindowEvent e)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e)
+	{
+		// TODO Auto-generated method stub
+		
+	}
 }

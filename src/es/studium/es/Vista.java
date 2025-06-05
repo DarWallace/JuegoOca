@@ -1,53 +1,45 @@
 package es.studium.es;
 
-import java.awt.BorderLayout;
-import java.awt.Button;
-import java.awt.Color;
-import java.awt.Frame;
-import java.awt.GridLayout;
-import java.awt.Label;
-import java.awt.Panel;
 
-public class Vista extends Frame
+import javax.swing.*;
+import java.awt.*;
+
+public class Vista extends JFrame
 {
-	private static final long serialVersionUID = 1L;
-	Label lblMenuPrincipal = new Label("MENÚ PRINCIPAL", 1); // El 1 para que salga centrada
-	Panel pnlBotonera = new Panel(); // Panel para botonera principal
-	Panel pnlBotoneraSalir = new Panel(); // Panel para botón Salir
-	Button btnPartidaNueva = new Button("Partida Nueva");
-	Button btnRanking = new Button("Top 10");
-	Button btnAyuda = new Button("Ayuda");
-	Button btnSalir = new Button("Salir");
+    private static final long serialVersionUID = 1L;
 
-	public Vista()
-	{
-		setTitle("Serpientes y Escaleras"); // Título
-		setBackground(Color.GREEN); // Color de fondo del Frame
-		setLayout(new BorderLayout()); // Layout del Frame
-		pnlBotonera.setLayout(new GridLayout(4, 1)); // Layout del Panel
-		pnlBotonera.add(lblMenuPrincipal); // Añadir botón a panel
-		pnlBotonera.add(btnPartidaNueva); // Añadir botón a panel
-		pnlBotonera.add(btnRanking); // Añadir botón a panel
-		pnlBotonera.add(btnAyuda); // Añadir botón a panel
-		add(pnlBotonera, "Center"); // Añadir Panel a Frame
-		pnlBotoneraSalir.add(btnSalir); // Añadir botón a panel
-		add(pnlBotoneraSalir, "South"); // Añadir Panel a Frame
-		setSize(400, 200); // Tamaño de Frame
-		setLocationRelativeTo(null); // Centrar la ventana
-		setResizable(false); // Evitar redimensionado
-		MostrarPrincipal(); // Mostrarlo
-	}
+    public JButton btnPartidaNueva = new JButton("Partida Nueva");
+    public JButton btnRanking = new JButton("Ranking");
+    // Puedes añadir más botones o componentes según necesites
 
-	public void MostrarPrincipal()
-	{
-		this.setVisible(true);
-	}
+    public Vista()
+    {
+        setTitle("Menú Principal");
+        setSize(400, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
+        setLocationRelativeTo(null); // Centra la ventana
 
-	public void OcultarPrincipal()
-	{
-		this.setVisible(false);
-	}
-	//public int getNumJugadores() {
-		//return numJugadores;
-	//}
+        // Panel principal
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridBagLayout());
+        panel.setBackground(Color.WHITE); // Puedes cambiar el color
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+
+        // Botón "Partida Nueva"
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        panel.add(btnPartidaNueva, gbc);
+
+        // Botón "Ranking"
+        gbc.gridy = 1;
+        panel.add(btnRanking, gbc);
+
+        setContentPane(panel);
+        setVisible(true);
+    }
+
+    
 }
