@@ -30,7 +30,7 @@ public class Controlador2 extends WindowAdapter implements ActionListener
 		if (e.getSource() == vista.btnPartidaNueva)
 		{
 			// Por defecto lanzamos para 2 jugadores; aquí podrías pedir el número antes
-			inicioPartida = new InicioPartida(4); // O el número que elijas
+			inicioPartida = new InicioPartida(2); // O el número que elijas
 			inicioPartida.addWindowListener(this);
 			inicioPartida.btnAceptar.addActionListener(this);
 			inicioPartida.btnAtras.addActionListener(this);
