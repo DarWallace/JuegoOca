@@ -52,6 +52,6 @@ public class SeleccionJugadores extends JFrame
         panel.add(btn4jugadores, gbc);
 
         setContentPane(panel);
-        setVisible(true);
+        setVisible(false);
     }
 }

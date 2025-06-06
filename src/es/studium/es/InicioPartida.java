@@ -90,6 +90,13 @@ public class InicioPartida extends JFrame
         panel.add(choiceColorJ3, c);
         }
         if (numJugadores ==4) {
+        // Jugador 3
+        c.gridy = 3; c.gridx = 0;
+        panel.add(lblJugador3, c);
+        c.gridx = 1;
+        panel.add(txtNombreJ3, c);
+        c.gridx = 2;
+        panel.add(choiceColorJ3, c);
         // Jugador 4
         c.gridy = 4; c.gridx = 0;
         panel.add(lblJugador4, c);
@@ -103,7 +110,7 @@ public class InicioPartida extends JFrame
         panel.add(btnAceptar, c);
 
         setContentPane(panel);
-        setVisible(true);
+        setVisible(false);
     }
 
     public int getNumJugadores() { return numJugadores; }
@@ -114,9 +121,5 @@ public class InicioPartida extends JFrame
     public String getColorJugador1() { return (String) choiceColorJ1.getSelectedItem(); }
     public String getColorJugador2() { return (String) choiceColorJ2.getSelectedItem(); }
     public String getColorJugador3() { return (String) choiceColorJ3.getSelectedItem(); }
-    public String getColorJugador4() { return (String) choiceColorJ4.getSelectedItem(); }
- public static void main(String[] args)
-{
-	new InicioPartida(3);
-}   
+    public String getColorJugador4() { return (String) choiceColorJ4.getSelectedItem(); } 
 }
