@@ -29,6 +29,11 @@ public class Controlador implements ActionListener
             new SeleccionJugadores(); // Cambia el número si quieres más jugadores
             vista.frame.setVisible(false);
         }
+        else if(e.getSource() == vista.btnRanking)
+        {
+            new VistaRanking();
+            vista.frame.setVisible(false); // ocultamos la principal si quieres
+        }
         else if(inicioPartida != null && e.getSource() == inicioPartida.btnAtras)
         {
             inicioPartida.dispose();
@@ -54,7 +59,12 @@ public class Controlador implements ActionListener
                 nombres[3] = inicioPartida.getNombreJugador4();
                 colores[3] = inicioPartida.getColorJugador4();
             }
-
+            // hay que añadir  la opción para el botón Ranking
+            else if(e.getSource() == vista.btnRanking)
+            {
+                new VistaRanking(); // sale la clase Vista ranking el frame o panel
+                vista.frame.setVisible(true);
+            }
             inicioPartida.dispose();
             
         }

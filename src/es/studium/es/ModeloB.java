@@ -19,7 +19,7 @@ public class ModeloB
 	String driver = "com.mysql.cj.jdbc.Driver";
 	String url = "jdbc:mysql://localhost:3306/juegooca";
 	String login = "admin";
-	String password = "Studium2025#";
+	String password = " Studium2025#";
 	String sentencia = "";
 
 	Connection connection = null;
