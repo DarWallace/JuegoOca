@@ -6,11 +6,13 @@ import java.awt.event.ActionListener;
 public class Controlador implements ActionListener
 {
 	Vista vista;
-	ModeloT modelo;
+	ModeloB modelo;
 	InicioPartida inicioPartida;
 	SeleccionJugadores seleccionJugadores;
+	Tablero tableroJuego;
+	VistaRanking vistaRanking;
 
-	public Controlador(Vista v, ModeloT m)
+	public Controlador(Vista v, ModeloB m)
 	{
 		this.vista = v;
 		this.modelo = m;
@@ -18,15 +20,17 @@ public class Controlador implements ActionListener
 		vista.btnPartidaNueva.addActionListener(this);
 		vista.btnRanking.addActionListener(this);
 		vista.btnAyuda.addActionListener(this);
-		seleccionJugadores.btn2jugadores.addActionListener(this);
-		seleccionJugadores.btn3jugadores.addActionListener(this);
-		seleccionJugadores.btn4jugadores.addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		if (e.getSource() == vista.btnPartidaNueva)
+		if(e.getSource() == vista.btnRanking) {
+			vistaRanking = new VistaRanking();
+			vista.frame.setVisible(false);
+			vistaRanking.setVisible(true);
+		}
+		else if (e.getSource() == vista.btnPartidaNueva)
 		{
 			seleccionJugadores = new SeleccionJugadores(); // ← asignación correcta
 			// Añadir listeners a los botones nuevos
@@ -36,8 +40,7 @@ public class Controlador implements ActionListener
 
 			vista.frame.setVisible(false);
 			seleccionJugadores.setVisible(true);
-		} 
-		else if (e.getSource() == seleccionJugadores.btn2jugadores)
+		} else if (e.getSource() == seleccionJugadores.btn2jugadores)
 		{
 			inicioPartida = new InicioPartida(2); // ← ahora sí se guarda
 			inicioPartida.btnAtras.addActionListener(this);
@@ -45,8 +48,7 @@ public class Controlador implements ActionListener
 
 			inicioPartida.setVisible(true);
 			seleccionJugadores.dispose();
-		} 
-		else if (e.getSource() == seleccionJugadores.btn3jugadores)
+		} else if (e.getSource() == seleccionJugadores.btn3jugadores)
 		{
 			inicioPartida = new InicioPartida(3);
 			inicioPartida.btnAtras.addActionListener(this);
@@ -54,8 +56,7 @@ public class Controlador implements ActionListener
 
 			inicioPartida.setVisible(true);
 			seleccionJugadores.dispose();
-		}
-		else if (e.getSource() == seleccionJugadores.btn4jugadores)
+		} else if (e.getSource() == seleccionJugadores.btn4jugadores)
 		{
 			inicioPartida = new InicioPartida(4);
 			inicioPartida.btnAtras.addActionListener(this);
@@ -63,41 +64,37 @@ public class Controlador implements ActionListener
 
 			inicioPartida.setVisible(true);
 			seleccionJugadores.dispose();
-		}
-		else if (inicioPartida != null && e.getSource() == inicioPartida.btnAtras)
+		} else if (inicioPartida != null && e.getSource() == inicioPartida.btnAtras)
 		{
 			inicioPartida.dispose();
 			seleccionJugadores.setVisible(true);
-		} 
-		else if (inicioPartida != null && e.getSource() == inicioPartida.btnAceptar)
+		} else if (inicioPartida != null && e.getSource() == inicioPartida.btnAceptar)
 		{
 			int numJugadores = inicioPartida.getNumJugadores();
-			String[] nombres = new String[numJugadores];
-			String[] colores = new String[numJugadores];
-
-			if (numJugadores >= 1)
-			{
-				nombres[0] = inicioPartida.getNombreJugador1();
-				colores[0] = inicioPartida.getColorJugador1();
-			}
+			System.out.println(numJugadores);
 			if (numJugadores >= 2)
 			{
-				nombres[1] = inicioPartida.getNombreJugador2();
-				colores[1] = inicioPartida.getColorJugador2();
-			}
-			if (numJugadores >= 3)
+				tableroJuego = new Tablero(numJugadores, inicioPartida.getNombreJugador1(), inicioPartida.getColorJugador1(),
+						inicioPartida.getNombreJugador2(), inicioPartida.getColorJugador2(), "", "", "", "");
+				System.out.println(inicioPartida.getColorJugador1());
+				tableroJuego.setVisible(true);
+				inicioPartida.dispose();
+			} else if (numJugadores >= 3)
 			{
-				nombres[2] = inicioPartida.getNombreJugador3();
-				colores[2] = inicioPartida.getColorJugador3();
-			}
-			if (numJugadores >= 4)
+				tableroJuego = new Tablero(numJugadores, inicioPartida.getNombreJugador1(), inicioPartida.getColorJugador1(),
+						inicioPartida.getNombreJugador2(), inicioPartida.getColorJugador2(),
+						inicioPartida.getNombreJugador3(), inicioPartida.getColorJugador3(), "", "");
+				tableroJuego.setVisible(true);
+				inicioPartida.dispose();
+			} else if (numJugadores >= 4)
 			{
-				nombres[3] = inicioPartida.getNombreJugador4();
-				colores[3] = inicioPartida.getColorJugador4();
+				tableroJuego = new Tablero(numJugadores, inicioPartida.getNombreJugador1(), inicioPartida.getColorJugador1(),
+						inicioPartida.getNombreJugador2(), inicioPartida.getColorJugador2(),
+						inicioPartida.getNombreJugador3(), inicioPartida.getColorJugador3(),
+						inicioPartida.getNombreJugador4(), inicioPartida.getColorJugador4());
+				tableroJuego.setVisible(true);
+				inicioPartida.dispose();
 			}
-
-			inicioPartida.dispose();
-			// Aquí podrías continuar con lógica para iniciar el juego
 		}
 	}
 }

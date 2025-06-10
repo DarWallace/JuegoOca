@@ -12,8 +12,8 @@ public class SeleccionJugadores extends JFrame
 	public JButton btn2jugadores = new JButton("2 jugadores");
     public JButton btn3jugadores = new JButton("3 jugadores");
     public JButton btn4jugadores = new JButton("4 jugadores");
-    Toolkit toolkit = Toolkit.getDefaultToolkit();
-    Image backgroundImage = toolkit.getImage("img\\Copia de fondo.png");
+    Toolkit herramientas = Toolkit.getDefaultToolkit();
+    Image backgroundImage = herramientas.getImage("img\\Copia de fondo.png");
 
     // Crear un panel para dibujar la imagen de fondo
     

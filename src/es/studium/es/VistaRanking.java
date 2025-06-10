@@ -14,7 +14,7 @@ public class VistaRanking extends Frame
 	
 	public VistaRanking()
 	{
-		setTitle("Serpientes y Escaleras: Ranking"); // Título
+		setTitle("Juego de la Oca: Ranking"); // Título
 		setBackground(Color.GREEN); // Color de fondo del Frame
 		setLayout(new BorderLayout()); // Layout del Frame
 		txaRanking.append("#\tNombre\t\tPuntos");
@@ -23,14 +23,5 @@ public class VistaRanking extends Frame
 		setSize(400,200); // Tamaño de Frame
 		setLocationRelativeTo(null); // Centrar la ventana
 		setResizable(false); // Evitar redimensionado
-	}
-	public void MostrarTopTen()
-	{
-		this.setVisible(true);
-	}
-	
-	public void OcultarTopTen()
-	{
-		this.setVisible(false);
 	}
 }

@@ -1,16 +1,17 @@
 package es.studium.es;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 
 
@@ -21,7 +22,7 @@ public class ModeloB
 	String login = "admin";
 	String password = "Studium2025#";
 	String sentencia = "";
-
+	Random rnd = new Random();
 	Connection connection = null;
 	Statement statement = null;
 	ResultSet rs = null;
@@ -106,7 +107,12 @@ public class ModeloB
 		}
 	}
 	
-	
+	public int tirada()
+	{
+		int t;
+		t = rnd.nextInt(6)+1; // 0-5
+		return (t);
+	}
 	
 	public void guardarLog( String mensaje) {
 		//[01/04/2025][11:50:40][mensaje]

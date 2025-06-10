@@ -18,8 +18,8 @@ public class Vista
     JButton btnRanking = new JButton("Ranking");
 
     // Obtener la imagen de fondo usando Toolkit
-    Toolkit toolkit = Toolkit.getDefaultToolkit();
-    Image backgroundImage = toolkit.getImage("img\\Copia de fondo.png");
+    Toolkit herramientas = Toolkit.getDefaultToolkit();
+    Image backgroundImage = herramientas.getImage("img\\Copia de fondo.png");
 
     public Vista() {
     	frame.setSize(800, 600);  // Tamaño de la ventana

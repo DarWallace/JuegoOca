@@ -34,7 +34,7 @@ public class InicioPartida extends JFrame
  
     public InicioPartida(int numJugadores)
     {
-       
+    	this.numJugadores = numJugadores;
         setTitle("Selección de jugadores (" + numJugadores + " jugadores)");
         setSize(500, 300);
         setResizable(false);
