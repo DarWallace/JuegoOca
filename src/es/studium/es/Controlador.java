@@ -72,21 +72,24 @@ public class Controlador implements ActionListener
 		{
 			int numJugadores = inicioPartida.getNumJugadores();
 			System.out.println(numJugadores);
-			if (numJugadores >= 2)
+			if (numJugadores == 2)
 			{
 				tableroJuego = new Tablero(numJugadores, inicioPartida.getNombreJugador1(), inicioPartida.getColorJugador1(),
 						inicioPartida.getNombreJugador2(), inicioPartida.getColorJugador2(), "", "", "", "");
 				System.out.println(inicioPartida.getColorJugador1());
+				System.out.println(inicioPartida.getNombreJugador1());
+				System.out.println(inicioPartida.getNombreJugador2());
 				tableroJuego.setVisible(true);
 				inicioPartida.dispose();
-			} else if (numJugadores >= 3)
+			} else if (numJugadores == 3)
 			{
 				tableroJuego = new Tablero(numJugadores, inicioPartida.getNombreJugador1(), inicioPartida.getColorJugador1(),
 						inicioPartida.getNombreJugador2(), inicioPartida.getColorJugador2(),
 						inicioPartida.getNombreJugador3(), inicioPartida.getColorJugador3(), "", "");
+				System.out.println(inicioPartida.getNombreJugador3());
 				tableroJuego.setVisible(true);
 				inicioPartida.dispose();
-			} else if (numJugadores >= 4)
+			} else if (numJugadores == 4)
 			{
 				tableroJuego = new Tablero(numJugadores, inicioPartida.getNombreJugador1(), inicioPartida.getColorJugador1(),
 						inicioPartida.getNombreJugador2(), inicioPartida.getColorJugador2(),

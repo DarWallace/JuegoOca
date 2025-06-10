@@ -24,20 +24,20 @@ public class Tablero extends JFrame
     private int contadorTiradas2 = 0;
     private int contadorTiradas3 = 0;
     private int contadorTiradas4 = 0;
-    private JLabel lblJugador1 = new JLabel("Jugador 1:");
-    private JLabel lblJugador2 = new JLabel("Jugador 2:");
-    private JLabel lblJugador3 = new JLabel("Jugador 3:");
-    private JLabel lblJugador4 = new JLabel("Jugador 4:");
+    private JLabel lblJugador1 = new JLabel("Jugador 1:", JLabel.CENTER);
+    private JLabel lblJugador2 = new JLabel("Jugador 2:", JLabel.CENTER);
+    private JLabel lblJugador3 = new JLabel("Jugador 3:", JLabel.CENTER);
+    private JLabel lblJugador4 = new JLabel("Jugador 4:", JLabel.CENTER);
 
-    private JLabel lblTirada1 = new JLabel(contadorTiradas1 + "");
-    private JLabel lblTirada2 = new JLabel(contadorTiradas2 + "");
-    private JLabel lblTirada3 = new JLabel(contadorTiradas3 + "");
-    private JLabel lblTirada4 = new JLabel(contadorTiradas4 + "");
+    private JLabel lblTirada1 = new JLabel(contadorTiradas1 + "", JLabel.CENTER);
+    private JLabel lblTirada2 = new JLabel(contadorTiradas2 + "", JLabel.CENTER);
+    private JLabel lblTirada3 = new JLabel(contadorTiradas3 + "", JLabel.CENTER);
+    private JLabel lblTirada4 = new JLabel(contadorTiradas4 + "", JLabel.CENTER);
 
-    private JLabel lblCasilla1 = new JLabel("0");
-    private JLabel lblCasilla2 = new JLabel("0");
-    private JLabel lblCasilla3 = new JLabel("0");
-    private JLabel lblCasilla4 = new JLabel("0");
+    private JLabel lblCasilla1 = new JLabel("0", JLabel.CENTER);
+    private JLabel lblCasilla2 = new JLabel("0", JLabel.CENTER);
+    private JLabel lblCasilla3 = new JLabel("0", JLabel.CENTER);
+    private JLabel lblCasilla4 = new JLabel("0", JLabel.CENTER);
 
     private JLabel lblColor1 = new JLabel();
     private JLabel lblColor2 = new JLabel();
@@ -93,8 +93,8 @@ public class Tablero extends JFrame
         panel.setLayout(null); // Para posicionar elementos de manera absoluta
 
         // Tabla de jugadores en la parte derecha
-        JPanel tablePanel = new JPanel(new GridLayout(5, 4, 1, 1));  // Aumento de columnas para que quepan todas las celdas
-        tablePanel.setBounds(1340, 100, 200, 200); // Ubicación de la tabla
+        JPanel tablePanel = new JPanel(new GridLayout(1 + numJugadores, 4, 1, 1));
+        tablePanel.setBounds(1340, 100, 250, 250); // Ubicación de la tabla
         tablePanel.setBackground(new Color(255, 255, 204)); // Color de fondo de la tabla
 
         // Ajustar las fichas de color
@@ -152,10 +152,10 @@ public class Tablero extends JFrame
             lblColor4.setPreferredSize(new Dimension(2, 2));  // Tamaño de la ficha
         }
         
-        tablePanel.add(new JLabel("Nombre"));
-        tablePanel.add(new JLabel("Tiradas"));
-        tablePanel.add(new JLabel("Casilla"));
-        tablePanel.add(new JLabel("Ficha"));
+        tablePanel.add(new JLabel("Nombre", JLabel.CENTER));
+        tablePanel.add(new JLabel("Tiradas", JLabel.CENTER));
+        tablePanel.add(new JLabel("Casilla", JLabel.CENTER));
+        tablePanel.add(new JLabel("Ficha", JLabel.CENTER));
 
         // Agregar labels para cada jugador
         tablePanel.add(new JLabel(jugador1));
@@ -163,6 +163,7 @@ public class Tablero extends JFrame
         tablePanel.add(lblCasilla1);
         tablePanel.add(lblColor1); // Ficha junto al jugador
 
+        System.out.println(jugador2);
         tablePanel.add(new JLabel(jugador2));
         tablePanel.add(lblTirada2);
         tablePanel.add(lblCasilla2);
@@ -170,6 +171,7 @@ public class Tablero extends JFrame
 
         if (numJugadores >= 3)
         {
+        	System.out.println(jugador3);
             tablePanel.add(new JLabel(jugador3));
             tablePanel.add(lblTirada3);
             tablePanel.add(lblCasilla3);
@@ -184,12 +186,12 @@ public class Tablero extends JFrame
         }
 
         // Agregar los botones debajo de la tabla (en la parte derecha)
-        btnTirarDados.setBounds(1340, 480, 200, 50);
+        btnTirarDados.setBounds(1390, 480, 200, 50);
         panel.add(tablePanel);
         panel.add(btnTirarDados);
 
         // Agregar el botón "Rehacer" debajo de la imagen del tablero (debajo de la Oca)
-        btnRehacer.setBounds(760, 660, 200, 50); // Colocarlo al centro, justo abajo
+        btnRehacer.setBounds(105, 600, 200, 50); // Colocarlo al centro, justo abajo
         panel.add(btnRehacer);
 
         // Agregar el panel principal al JFrame
