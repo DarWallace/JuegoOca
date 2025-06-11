@@ -11,6 +11,7 @@ public class Controlador implements ActionListener
 	SeleccionJugadores seleccionJugadores;
 	Tablero tableroJuego;
 	VistaRanking vistaRanking;
+	
 
 	public Controlador(Vista v, ModeloB m)
 	{
@@ -30,8 +31,14 @@ public class Controlador implements ActionListener
 			vistaRanking.btnVolver.addActionListener(this);
 			vista.frame.setVisible(true);
 			vistaRanking.setVisible(true);
-		}else if (e.getSource() == vistaRanking.btnVolver)
+		}
+		else if (vistaRanking !=null && e.getSource() == vistaRanking.btnVolver)
 		{vistaRanking.setVisible(false);}
+		
+		else if (e.getSource() == vista.btnAyuda)
+		{ModeloB.ayuda();
+		}
+		
 		else if (e.getSource() == vista.btnPartidaNueva)
 		{
 			seleccionJugadores = new SeleccionJugadores(); // ← asignación correcta
@@ -42,7 +49,7 @@ public class Controlador implements ActionListener
 
 			vista.frame.setVisible(false);
 			seleccionJugadores.setVisible(true);
-		} else if (e.getSource() == seleccionJugadores.btn2jugadores)
+		} else if (seleccionJugadores !=null && e.getSource() == seleccionJugadores.btn2jugadores)
 		{
 			inicioPartida = new InicioPartida(2); // ← ahora sí se guarda
 			inicioPartida.btnAtras.addActionListener(this);
@@ -50,7 +57,7 @@ public class Controlador implements ActionListener
 
 			inicioPartida.setVisible(true);
 			seleccionJugadores.dispose();
-		} else if (e.getSource() == seleccionJugadores.btn3jugadores)
+		} else if (seleccionJugadores !=null && e.getSource() == seleccionJugadores.btn3jugadores)
 		{
 			inicioPartida = new InicioPartida(3);
 			inicioPartida.btnAtras.addActionListener(this);
@@ -58,7 +65,7 @@ public class Controlador implements ActionListener
 
 			inicioPartida.setVisible(true);
 			seleccionJugadores.dispose();
-		} else if (e.getSource() == seleccionJugadores.btn4jugadores)
+		} else if (seleccionJugadores !=null && e.getSource() == seleccionJugadores.btn4jugadores)
 		{
 			inicioPartida = new InicioPartida(4);
 			inicioPartida.btnAtras.addActionListener(this);
