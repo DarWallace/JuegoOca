@@ -27,9 +27,11 @@ public class Controlador implements ActionListener
 	{
 		if(e.getSource() == vista.btnRanking) {
 			vistaRanking = new VistaRanking();
-			vista.frame.setVisible(false);
+			vistaRanking.btnVolver.addActionListener(this);
+			vista.frame.setVisible(true);
 			vistaRanking.setVisible(true);
-		}
+		}else if (e.getSource() == vistaRanking.btnVolver)
+		{vistaRanking.setVisible(false);}
 		else if (e.getSource() == vista.btnPartidaNueva)
 		{
 			seleccionJugadores = new SeleccionJugadores(); // ← asignación correcta
@@ -72,21 +74,21 @@ public class Controlador implements ActionListener
 		{
 			int numJugadores = inicioPartida.getNumJugadores();
 			System.out.println(numJugadores);
-			if (numJugadores >= 2)
+			if (numJugadores == 2)
 			{
 				tableroJuego = new Tablero(numJugadores, inicioPartida.getNombreJugador1(), inicioPartida.getColorJugador1(),
 						inicioPartida.getNombreJugador2(), inicioPartida.getColorJugador2(), "", "", "", "");
 				System.out.println(inicioPartida.getColorJugador1());
 				tableroJuego.setVisible(true);
 				inicioPartida.dispose();
-			} else if (numJugadores >= 3)
+			} else if (numJugadores == 3)
 			{
 				tableroJuego = new Tablero(numJugadores, inicioPartida.getNombreJugador1(), inicioPartida.getColorJugador1(),
 						inicioPartida.getNombreJugador2(), inicioPartida.getColorJugador2(),
 						inicioPartida.getNombreJugador3(), inicioPartida.getColorJugador3(), "", "");
 				tableroJuego.setVisible(true);
 				inicioPartida.dispose();
-			} else if (numJugadores >= 4)
+			} else if (numJugadores == 4)
 			{
 				tableroJuego = new Tablero(numJugadores, inicioPartida.getNombreJugador1(), inicioPartida.getColorJugador1(),
 						inicioPartida.getNombreJugador2(), inicioPartida.getColorJugador2(),

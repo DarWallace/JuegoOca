@@ -79,7 +79,7 @@ public class ModeloB
 	public String consultarJugadores(Connection conexion)
 	{int posicion=0;
 		{
-			String contenidoTextarea = String.format("%-8s - %-18s - %-10s - %-4s\n","Posición","Nombre","Fecha","Tiradas");
+			String contenidoTextarea = String.format("%-8s - %-10s - %-15s - %-4s\n","Posición","Nombre","Fecha","Tiradas");
 			sentencia = "SELECT nombreJugador,date_format(fecha, '%d/%m/%Y') 'fechas',tiradas FROM ranking order by tiradas;";
 			try
 			{
@@ -89,7 +89,7 @@ public class ModeloB
 				while (rs.next())
 				{
 					 posicion++;
-					contenidoTextarea = contenidoTextarea + String.format("%-8s - %-18s - %-10s - %-4s\n",
+					contenidoTextarea = contenidoTextarea + String.format("%-8s - %-10s - %-15s - %-4s\n",
 							posicion,
 							rs.getString("nombreJugador"),
 							rs.getString("fechas"),
@@ -138,4 +138,17 @@ public class ModeloB
 		{
 			System.out.println("Se produjo un error de Archivo");
 		}}
+	public static void ayuda()
+	{
+		try
+		{
+			ProcessBuilder pb = new ProcessBuilder("hh.exe", "AyudaJuego.chm");
+			pb.start();
+			System.out.println("Abriendo el archivo CHM...");
+		}
+		catch (IOException e)
+		{
+			System.err.println("Error al intentar abrir el archivo CHM: " + e.getMessage());
+		}
+	}
 }
