@@ -80,7 +80,7 @@ public class InicioPartida extends JFrame
         panel.add(txtNombreJ2, c);
         c.gridx = 2;
         panel.add(choiceColorJ2, c);
-        if (numJugadores ==3) {
+        if (numJugadores >=3) {
         // Jugador 3
         c.gridy = 3; c.gridx = 0;
         panel.add(lblJugador3, c);
@@ -90,13 +90,7 @@ public class InicioPartida extends JFrame
         panel.add(choiceColorJ3, c);
         }
         if (numJugadores ==4) {
-        // Jugador 3
-        c.gridy = 3; c.gridx = 0;
-        panel.add(lblJugador3, c);
-        c.gridx = 1;
-        panel.add(txtNombreJ3, c);
-        c.gridx = 2;
-        panel.add(choiceColorJ3, c);
+        
         // Jugador 4
         c.gridy = 4; c.gridx = 0;
         panel.add(lblJugador4, c);

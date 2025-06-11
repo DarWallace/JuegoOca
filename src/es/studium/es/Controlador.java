@@ -11,6 +11,7 @@ public class Controlador implements ActionListener
 	SeleccionJugadores seleccionJugadores;
 	Tablero tableroJuego;
 	VistaRanking vistaRanking;
+	
 
 	public Controlador(Vista v, ModeloB m)
 	{
@@ -27,9 +28,17 @@ public class Controlador implements ActionListener
 	{
 		if(e.getSource() == vista.btnRanking) {
 			vistaRanking = new VistaRanking();
-			vista.frame.setVisible(false);
+			vistaRanking.btnVolver.addActionListener(this);
+			vista.frame.setVisible(true);
 			vistaRanking.setVisible(true);
 		}
+		else if (vistaRanking !=null && e.getSource() == vistaRanking.btnVolver)
+		{vistaRanking.setVisible(false);}
+		
+		else if (e.getSource() == vista.btnAyuda)
+		{ModeloB.ayuda();
+		}
+		
 		else if (e.getSource() == vista.btnPartidaNueva)
 		{
 			seleccionJugadores = new SeleccionJugadores(); // ← asignación correcta
@@ -40,7 +49,7 @@ public class Controlador implements ActionListener
 
 			vista.frame.setVisible(false);
 			seleccionJugadores.setVisible(true);
-		} else if (e.getSource() == seleccionJugadores.btn2jugadores)
+		} else if (seleccionJugadores !=null && e.getSource() == seleccionJugadores.btn2jugadores)
 		{
 			inicioPartida = new InicioPartida(2); // ← ahora sí se guarda
 			inicioPartida.btnAtras.addActionListener(this);
@@ -48,7 +57,7 @@ public class Controlador implements ActionListener
 
 			inicioPartida.setVisible(true);
 			seleccionJugadores.dispose();
-		} else if (e.getSource() == seleccionJugadores.btn3jugadores)
+		} else if (seleccionJugadores !=null && e.getSource() == seleccionJugadores.btn3jugadores)
 		{
 			inicioPartida = new InicioPartida(3);
 			inicioPartida.btnAtras.addActionListener(this);
@@ -56,7 +65,7 @@ public class Controlador implements ActionListener
 
 			inicioPartida.setVisible(true);
 			seleccionJugadores.dispose();
-		} else if (e.getSource() == seleccionJugadores.btn4jugadores)
+		} else if (seleccionJugadores !=null && e.getSource() == seleccionJugadores.btn4jugadores)
 		{
 			inicioPartida = new InicioPartida(4);
 			inicioPartida.btnAtras.addActionListener(this);
@@ -76,6 +85,8 @@ public class Controlador implements ActionListener
 			{
 				tableroJuego = new Tablero(numJugadores, inicioPartida.getNombreJugador1(), inicioPartida.getColorJugador1(),
 						inicioPartida.getNombreJugador2(), inicioPartida.getColorJugador2(), "", "", "", "");
+				tableroJuego.btnTirarDados.addActionListener(this);
+				tableroJuego.btnRehacer.addActionListener(this);
 				System.out.println(inicioPartida.getColorJugador1());
 				System.out.println(inicioPartida.getNombreJugador1());
 				System.out.println(inicioPartida.getNombreJugador2());
@@ -86,6 +97,8 @@ public class Controlador implements ActionListener
 				tableroJuego = new Tablero(numJugadores, inicioPartida.getNombreJugador1(), inicioPartida.getColorJugador1(),
 						inicioPartida.getNombreJugador2(), inicioPartida.getColorJugador2(),
 						inicioPartida.getNombreJugador3(), inicioPartida.getColorJugador3(), "", "");
+				tableroJuego.btnTirarDados.addActionListener(this);
+				tableroJuego.btnRehacer.addActionListener(this);
 				System.out.println(inicioPartida.getNombreJugador3());
 				tableroJuego.setVisible(true);
 				inicioPartida.dispose();
@@ -95,9 +108,15 @@ public class Controlador implements ActionListener
 						inicioPartida.getNombreJugador2(), inicioPartida.getColorJugador2(),
 						inicioPartida.getNombreJugador3(), inicioPartida.getColorJugador3(),
 						inicioPartida.getNombreJugador4(), inicioPartida.getColorJugador4());
+				tableroJuego.btnTirarDados.addActionListener(this);
+				tableroJuego.btnRehacer.addActionListener(this);
 				tableroJuego.setVisible(true);
 				inicioPartida.dispose();
 			}
+		}
+		else if (tableroJuego != null && e.getSource() == tableroJuego.btnTirarDados) {
+			tableroJuego.moverCasilla();
+			System.out.println("Pulsando");
 		}
 	}
 }
