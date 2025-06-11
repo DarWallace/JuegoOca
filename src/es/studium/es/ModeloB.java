@@ -34,9 +34,11 @@ public class ModeloB
 			connection = DriverManager.getConnection(url, login, password);
 		} catch (ClassNotFoundException e)
 		{
+			System.out.println("clase no funciona");
 			return null;
 		} catch (SQLException e)
 		{
+			System.out.println(e.getMessage());
 			return null;
 		}
 		return connection;
@@ -78,8 +80,8 @@ public class ModeloB
 	public String consultarJugadores(Connection conexion)
 	{int posicion=0;
 		{
-			String contenidoTextarea = String.format("%-8s - %-18s - %-10s - %-4s\n","Posición","Nombre","Fecha","Tiradas");
-			sentencia = "SELECT nombreJugador,date_format(fecha, '%d/%m/%Y') 'fechas',tiradas FROM ranking order by tiradas;";
+			String contenidoTextarea = String.format("%-8s - %-10s - %-12s - %-4s\n","Posición","Nombre","Fecha","Tiradas");
+			sentencia = "SELECT nombreJugador,date_format(fecha, '%d/%m/%Y') 'fechas',tiradas FROM ranking order by tiradas, fecha DESC LIMIT 10;";
 			try
 			{
 				statement = conexion.createStatement();
@@ -88,7 +90,7 @@ public class ModeloB
 				while (rs.next())
 				{
 					 posicion++;
-					contenidoTextarea = contenidoTextarea + String.format("%-8s - %-18s - %-10s - %-4s\n",
+					contenidoTextarea = contenidoTextarea + String.format("%-8s - %-10s - %-12s - %-4s\n",
 							posicion,
 							rs.getString("nombreJugador"),
 							rs.getString("fechas"),
