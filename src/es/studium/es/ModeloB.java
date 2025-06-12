@@ -13,8 +13,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
-
-
 public class ModeloB
 {
 	String driver = "com.mysql.cj.jdbc.Driver";
@@ -26,6 +24,7 @@ public class ModeloB
 	Connection connection = null;
 	Statement statement = null;
 	ResultSet rs = null;
+	// Añadir este método en la clase ModeloB
 
 	public Connection conectarB()
 	{
@@ -59,27 +58,29 @@ public class ModeloB
 	public boolean altaJugador(Connection conexion, String nombre, int tiradas)
 	{
 		boolean altaCorrecta = false;
-		
-			sentencia = "INSERT INTO ranking VALUES (null,'" + nombre + "',' CURDATE() ',"+tiradas+");";
-			try
-			{
-				statement =  conexion.createStatement();
-				guardarLog(sentencia);
-				statement.executeUpdate(sentencia);
-				altaCorrecta = true;
 
-			} catch (SQLException e)
-			{
-				altaCorrecta = false;
-			}
-		
+		sentencia = "INSERT INTO ranking VALUES (null,'" + nombre + "',' CURDATE() '," + tiradas + ");";
+		try
+		{
+			statement = conexion.createStatement();
+			guardarLog(sentencia);
+			statement.executeUpdate(sentencia);
+			altaCorrecta = true;
+
+		} catch (SQLException e)
+		{
+			altaCorrecta = false;
+		}
+
 		return altaCorrecta;
 	}
-	
+
 	public String consultarJugadores(Connection conexion)
-	{int posicion=0;
+	{
+		int posicion = 0;
 		{
-			String contenidoTextarea = String.format("%-8s - %-10s - %-15s - %-4s\n","Posición","Nombre","Fecha","Tiradas");
+			String contenidoTextarea = String.format("%-8s - %-10s - %-15s - %-4s\n", "Posición", "Nombre", "Fecha",
+					"Tiradas");
 			sentencia = "SELECT nombreJugador,date_format(fecha, '%d/%m/%Y') 'fechas',tiradas FROM ranking order by tiradas;";
 			try
 			{
@@ -88,12 +89,9 @@ public class ModeloB
 				rs = statement.executeQuery(sentencia);
 				while (rs.next())
 				{
-					 posicion++;
-					contenidoTextarea = contenidoTextarea + String.format("%-8s - %-10s - %-15s - %-4s\n",
-							posicion,
-							rs.getString("nombreJugador"),
-							rs.getString("fechas"),
-							rs.getString("tiradas"));
+					posicion++;
+					contenidoTextarea = contenidoTextarea + String.format("%-8s - %-10s - %-15s - %-4s\n", posicion,
+							rs.getString("nombreJugador"), rs.getString("fechas"), rs.getString("tiradas"));
 
 				}
 
@@ -106,18 +104,80 @@ public class ModeloB
 			return contenidoTextarea;
 		}
 	}
-	
+
 	public int tirada()
 	{
 		int t;
-		t = rnd.nextInt(6)+1; // 0-5
+		t = rnd.nextInt(6) + 1; // 0-5
 		return (t);
 	}
+
+	public boolean posada()
+	{
+		return false;
+	}
+
+	public boolean calavera()
+	{
+		return false;
+	}
 	
-	public void guardarLog( String mensaje) {
-		//[01/04/2025][11:50:40][mensaje]
+	public int moverCasillaOca(int contadorCasillas) {
+		switch(contadorCasillas)
+		{
+		case 5: 
+			return 9;
+		case 9:
+			return 14;
+		case 14:
+			return 18;
+		case 18:
+			return 23;
+		case 23:
+			return 27;
+		case 27:
+			return 32;
+		case 32:
+			return 36;
+		case 36:
+			return 41;
+		case 41:
+			return 45;
+		case 45:
+			return 50;
+		case 50:
+			return 54;
+		case 54:
+			return 59;
+		case 59:
+			return 63;
+		default:
+			return contadorCasillas;
+		}
+	}
+
+	public boolean ocaComprobarTurno(int contadorCasillas)
+	{
+		if (contadorCasillas == 5 || contadorCasillas == 9 || contadorCasillas == 14 || contadorCasillas == 18
+				|| contadorCasillas == 23 || contadorCasillas == 27 || contadorCasillas == 32 || contadorCasillas == 36
+				|| contadorCasillas == 41 || contadorCasillas == 45 || contadorCasillas == 50 || contadorCasillas == 54
+				|| contadorCasillas == 59)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	public boolean puente()
+	{
+		return false;
+	}
+
+	public void guardarLog(String mensaje)
+	{
+		// [01/04/2025][11:50:40][mensaje]
 		Date ahora = new Date();
-		SimpleDateFormat formateador= new SimpleDateFormat("[dd/MM/yyyy][HH:mm:ss.S]");
+		SimpleDateFormat formateador = new SimpleDateFormat("[dd/MM/yyyy][HH:mm:ss.S]");
 
 		try
 		{
@@ -128,7 +188,7 @@ public class ModeloB
 			// Objeto para la escritura
 			PrintWriter salida = new PrintWriter(bw);
 			// Guardamos la primera línea
-			salida.println(formateador.format(ahora)+" ["+mensaje+"]");
+			salida.println(formateador.format(ahora) + " [" + mensaje + "]");
 			// Cerrar el objeto salida, el objeto bw y el fw
 			salida.close();
 			bw.close();
@@ -137,7 +197,9 @@ public class ModeloB
 		} catch (IOException i)
 		{
 			System.out.println("Se produjo un error de Archivo");
-		}}
+		}
+	}
+
 	public static void ayuda()
 	{
 		try
@@ -145,8 +207,7 @@ public class ModeloB
 			ProcessBuilder pb = new ProcessBuilder("hh.exe", "AyudaJuego.chm");
 			pb.start();
 			System.out.println("Abriendo el archivo CHM...");
-		}
-		catch (IOException e)
+		} catch (IOException e)
 		{
 			System.err.println("Error al intentar abrir el archivo CHM: " + e.getMessage());
 		}
