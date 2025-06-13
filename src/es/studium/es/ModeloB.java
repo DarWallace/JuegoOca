@@ -111,16 +111,6 @@ public class ModeloB
 		t = rnd.nextInt(6) + 1; // 0-5
 		return (t);
 	}
-
-	public boolean posada()
-	{
-		return false;
-	}
-
-	public boolean calavera()
-	{
-		return false;
-	}
 	
 	public int moverCasillaOca(int contadorCasillas) {
 		switch(contadorCasillas)
@@ -167,12 +157,79 @@ public class ModeloB
 		}
 		return false;
 	}
-
-	public boolean puente()
+	
+	public boolean puente(int contadorCasillas)
 	{
+		if(contadorCasillas == 6 || contadorCasillas == 12) {
+			return true;
+		}
 		return false;
 	}
 
+	public boolean posada(int contadorCasillas, int contadorTurnosPerdidos)
+	{
+		if(contadorCasillas == 19) {
+			return contadorTurnosPerdidos < 1;
+		}
+		return true;
+	}
+	
+	public boolean pozo(int contadorCasillas)
+	{
+		if(contadorCasillas == 58) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean laberinto(int contadorCasillas)
+	{
+		if(contadorCasillas == 42) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean carcel(int contadorCasillas)
+	{
+		if(contadorCasillas == 56) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean dados(int contadorCasillas)
+	{
+		if(contadorCasillas == 26 || contadorCasillas == 53) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean calavera(int contadorCasillas)
+	{
+		if(contadorCasillas == 58) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean victoriaFallida(int contadorCasillas)
+	{
+		if(contadorCasillas > 63) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean comprobarVictoria(int contadorCasillas)
+	{
+		if(contadorCasillas == 63) {
+			return true;
+		}
+		return false;
+	}
+	
 	public void guardarLog(String mensaje)
 	{
 		// [01/04/2025][11:50:40][mensaje]

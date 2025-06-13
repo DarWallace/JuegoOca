@@ -49,10 +49,15 @@ public class Controlador implements ActionListener
 			seleccionJugadores.btn2jugadores.addActionListener(this);
 			seleccionJugadores.btn3jugadores.addActionListener(this);
 			seleccionJugadores.btn4jugadores.addActionListener(this);
-
+			seleccionJugadores.btnVolver.addActionListener(this);
 			vista.frame.setVisible(false);
 			seleccionJugadores.setVisible(true);
-		} else if (seleccionJugadores !=null && e.getSource() == seleccionJugadores.btn2jugadores)
+		}else if (seleccionJugadores !=null && e.getSource() == seleccionJugadores.btnVolver)
+		{
+			vista.frame.setVisible(true);
+			seleccionJugadores.dispose();
+		}
+		else if (seleccionJugadores !=null && e.getSource() == seleccionJugadores.btn2jugadores)
 		{
 			inicioPartida = new InicioPartida(2); // ← ahora sí se guarda
 			inicioPartida.btnAtras.addActionListener(this);
