@@ -1,7 +1,5 @@
 package es.studium.es;
 
-import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;

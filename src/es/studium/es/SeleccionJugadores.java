@@ -5,9 +5,6 @@ import java.awt.*;
 
 public class SeleccionJugadores extends JFrame
 {
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	public JButton btn2jugadores = new JButton("2 jugadores");
     public JButton btn3jugadores = new JButton("3 jugadores");
