@@ -120,6 +120,7 @@ public class Controlador implements ActionListener
 		}
 		else if (tableroJuego != null && e.getSource() == tableroJuego.btnTirarDados) {
 			tableroJuego.moverCasilla();
+			tableroJuego.actualizarLabelTurno();
 		}
 		else if(tableroJuego != null && e.getSource() == tableroJuego.btnRehacer) {
 			UIManager.put("OptionPane.yesButtonText", "Sí");
@@ -130,15 +131,38 @@ public class Controlador implements ActionListener
 			if (respuesta == JOptionPane.YES_OPTION){
 				JOptionPane.showMessageDialog(tableroJuego, "Se reinicio la partida", "Partida reiniciada",
 						JOptionPane.INFORMATION_MESSAGE);
-				tableroJuego.contadorTiradas1=0;
-				tableroJuego.contadorTiradas2=0;
-				tableroJuego.contadorTiradas3=0;
-				tableroJuego.contadorTiradas4=0;
-				tableroJuego.contadorCasillasJ1=1;
-				tableroJuego.contadorCasillasJ2=1;
-				tableroJuego.contadorCasillasJ3=1;
-				tableroJuego.contadorCasillasJ4=1;
-				
+				tableroJuego.contadorCasillasJ1 = 1;
+			    tableroJuego.contadorCasillasJ2 = 1;
+			    tableroJuego.contadorCasillasJ3 = 1;
+			    tableroJuego.contadorCasillasJ4 = 1;
+
+			    tableroJuego.contadorTiradas1 = 0;
+			    tableroJuego.contadorTiradas2 = 0;
+			    tableroJuego.contadorTiradas3 = 0;
+			    tableroJuego.contadorTiradas4 = 0;
+
+			    tableroJuego.saltosJ1 = 0;
+			    tableroJuego.saltosJ2 = 0;
+			    tableroJuego.saltosJ3 = 0;
+			    tableroJuego.saltosJ4 = 0;
+
+			    // Reinicia el turno al primero
+			    tableroJuego.turno = 1;
+			    tableroJuego.actualizarLabelTurno();
+
+			    // Actualiza los labels de casilla y tirada
+			    tableroJuego.lblCasilla1.setText("1");
+			    tableroJuego.lblCasilla2.setText("1");
+			    tableroJuego.lblCasilla3.setText("1");
+			    tableroJuego.lblCasilla4.setText("1");
+
+			    tableroJuego.lblTirada1.setText("0");
+			    tableroJuego.lblTirada2.setText("0");
+			    tableroJuego.lblTirada3.setText("0");
+			    tableroJuego.lblTirada4.setText("0");
+
+			    // Redibuja el tablero para reposicionar las fichas
+			    tableroJuego.repaint();
 				}else{
 				}
 		}
