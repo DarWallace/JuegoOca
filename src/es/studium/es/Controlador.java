@@ -3,6 +3,9 @@ package es.studium.es;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+
 public class Controlador implements ActionListener
 {
 	Vista vista;
@@ -87,9 +90,6 @@ public class Controlador implements ActionListener
 						inicioPartida.getNombreJugador2(), inicioPartida.getColorJugador2(), "", "", "", "");
 				tableroJuego.btnTirarDados.addActionListener(this);
 				tableroJuego.btnRehacer.addActionListener(this);
-				System.out.println(inicioPartida.getColorJugador1());
-				System.out.println(inicioPartida.getNombreJugador1());
-				System.out.println(inicioPartida.getNombreJugador2());
 				tableroJuego.setVisible(true);
 				inicioPartida.dispose();
 			} else if (numJugadores == 3)
@@ -99,7 +99,6 @@ public class Controlador implements ActionListener
 						inicioPartida.getNombreJugador3(), inicioPartida.getColorJugador3(), "", "");
 				tableroJuego.btnTirarDados.addActionListener(this);
 				tableroJuego.btnRehacer.addActionListener(this);
-				System.out.println(inicioPartida.getNombreJugador3());
 				tableroJuego.setVisible(true);
 				inicioPartida.dispose();
 			} else if (numJugadores == 4)
@@ -116,7 +115,27 @@ public class Controlador implements ActionListener
 		}
 		else if (tableroJuego != null && e.getSource() == tableroJuego.btnTirarDados) {
 			tableroJuego.moverCasilla();
-			System.out.println("Pulsando");
+		}
+		else if(tableroJuego != null && e.getSource() == tableroJuego.btnRehacer) {
+			UIManager.put("OptionPane.yesButtonText", "Sí");
+			UIManager.put("OptionPane.noButtonText", "No");
+			int respuesta = JOptionPane.showConfirmDialog(tableroJuego,
+					"¿Estás seguro de rehacer la partida? ", "Confirmación", JOptionPane.YES_NO_OPTION,
+					JOptionPane.QUESTION_MESSAGE);
+			if (respuesta == JOptionPane.YES_OPTION){
+				JOptionPane.showMessageDialog(tableroJuego, "Se reinicio la partida", "Partida reiniciada",
+						JOptionPane.INFORMATION_MESSAGE);
+				tableroJuego.contadorTiradas1=0;
+				tableroJuego.contadorTiradas2=0;
+				tableroJuego.contadorTiradas3=0;
+				tableroJuego.contadorTiradas4=0;
+				tableroJuego.contadorCasillasJ1=1;
+				tableroJuego.contadorCasillasJ2=1;
+				tableroJuego.contadorCasillasJ3=1;
+				tableroJuego.contadorCasillasJ4=1;
+				
+				}else{
+				}
 		}
 	}
 }
