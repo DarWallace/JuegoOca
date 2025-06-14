@@ -1,19 +1,30 @@
 package es.studium.es;
-import java.awt.*;
-import java.sql.*;
 
-public class VistaRanking extends Frame {
-    private static final long serialVersionUID = 1L;
-    TextArea txaRanking = new TextArea(20, 10);
-    Button btnVolver = new Button("Volver");
-    ModeloB modelob = new ModeloB();
-    Connection connection = null;
+import java.awt.BorderLayout;
+import java.awt.Button;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.TextArea;
+import java.sql.Connection;
 
-    public VistaRanking() {
-        setTitle(" Ranking de jugadores de la oca");
-        setBackground(Color.GREEN);
-        setLayout(new BorderLayout());
-         connection = modelob.conectarB();
+import javax.swing.JFrame;
+
+public class VistaRanking extends JFrame {
+	private static final long serialVersionUID = 1L;
+	TextArea txaRanking = new TextArea("", 20, 10, TextArea.SCROLLBARS_NONE);
+	Button btnVolver = new Button("Volver");
+	ModeloB modelob = new ModeloB();
+	Connection connection = null;
+
+	public VistaRanking() {
+		setUndecorated(true);
+
+		setTitle(" Ranking de jugadores de la oca");
+		txaRanking.setEditable(false);
+		txaRanking.setFocusable(false);
+		setBackground(Color.GREEN);
+		setLayout(new BorderLayout());
+		connection = modelob.conectarB();
 
 		txaRanking.append(modelob.consultarJugadores(connection));
 
@@ -21,18 +32,15 @@ public class VistaRanking extends Frame {
 
 		add(txaRanking);
 
-		txaRanking.setFont(new Font("Monospaced", Font.PLAIN, 12)); 
-  
-        add(txaRanking, BorderLayout.CENTER);
-        txaRanking.setFont(new Font ("monospaced", Font.PLAIN,12) ); // PARA QUE QUEDA ESPACIADO Y MAS BONITO
-        add(btnVolver, BorderLayout.SOUTH);
-        setSize(400, 200);
-        setLocationRelativeTo(null);
-        setResizable(false);
-        
-    }
-    
+		txaRanking.setFont(new Font("Monospaced", Font.PLAIN, 14));
 
-    
-    
+		add(txaRanking, BorderLayout.CENTER);
+
+		add(btnVolver, BorderLayout.SOUTH);
+		setSize(400, 200);
+		setLocationRelativeTo(null);
+		setResizable(false);
+
+	}
+
 }

@@ -5,3 +5,5 @@
 [10/06/2025][10:58:17.537] [SELECT nombreJugador,date_format(fecha, '%d/%m/%Y') 'fechas',tiradas FROM ranking order by tiradas, fecha DESC LIMIT 10;]
 [10/06/2025][11:03:06.497] [SELECT nombreJugador,date_format(fecha, '%d/%m/%Y') 'fechas',tiradas FROM ranking order by tiradas, fecha DESC LIMIT 10;]
 [10/06/2025][12:09:59.400] [SELECT nombreJugador,date_format(fecha, '%d/%m/%Y') 'fechas',tiradas FROM ranking order by tiradas, fecha DESC LIMIT 10;]
+[13/06/2025][19:50:37.373] [SELECT nombreJugador,date_format(fecha, '%d/%m/%Y') 'fechas',tiradas FROM ranking order by tiradas;]
+[13/06/2025][20:00:38.434] [SELECT nombreJugador,date_format(fecha, '%d/%m/%Y') 'fechas',tiradas FROM ranking order by tiradas;]

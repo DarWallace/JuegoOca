@@ -5,21 +5,20 @@ import java.awt.*;
 
 public class SeleccionJugadores extends JFrame
 {
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	public JButton btn2jugadores = new JButton("2 jugadores");
     public JButton btn3jugadores = new JButton("3 jugadores");
     public JButton btn4jugadores = new JButton("4 jugadores");
-    Toolkit toolkit = Toolkit.getDefaultToolkit();
-    Image backgroundImage = toolkit.getImage("img\\Copia de fondo.png");
+    Toolkit herramientas = Toolkit.getDefaultToolkit();
+    Image backgroundImage = herramientas.getImage("img\\Copia de fondo.png");
+    JButton btnVolver = new JButton("<--");
 
     // Crear un panel para dibujar la imagen de fondo
     
 
     public SeleccionJugadores()
     {
+    	
         setTitle("Menú Principal");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,8 +49,11 @@ public class SeleccionJugadores extends JFrame
         
         gbc.gridy = 2;
         panel.add(btn4jugadores, gbc);
-
+        
+        btnVolver.setBounds(10, 10, 100, 30);
+        getLayeredPane().add(btnVolver, JLayeredPane.PALETTE_LAYER);
+        
         setContentPane(panel);
-        setVisible(true);
+        setVisible(false);
     }
 }

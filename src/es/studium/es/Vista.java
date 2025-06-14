@@ -16,14 +16,17 @@ public class Vista
     JButton btnPartidaNueva = new JButton("Juego nuevo");
     JButton btnAyuda = new JButton("Ayuda");
     JButton btnRanking = new JButton("Ranking");
+    
+   
 
     // Obtener la imagen de fondo usando Toolkit
-    Toolkit toolkit = Toolkit.getDefaultToolkit();
-    Image backgroundImage = toolkit.getImage("img\\Copia de fondo.png");
+    Toolkit herramientas = Toolkit.getDefaultToolkit();
+    Image backgroundImage = herramientas.getImage("img\\Copia de fondo.png");
 
     public Vista() {
     	frame.setSize(800, 600);  // Tamaño de la ventana
     	frame.setLocationRelativeTo(null);
+    	
         // Crear un panel para dibujar la imagen de fondo
         JPanel panel = new JPanel() {
     		private static final long serialVersionUID = 1L;
@@ -46,6 +49,7 @@ public class Vista
         btnPartidaNueva.setPreferredSize(new Dimension(200, 50));
         btnAyuda.setPreferredSize(new Dimension(200, 50));
         btnRanking.setPreferredSize(new Dimension(200, 50));
+      
 
         // Posicionar el botón "Juego nuevo" al centro
         btnPartidaNueva.setBounds(300, 150, 200, 50);
@@ -58,6 +62,7 @@ public class Vista
         frame.add(btnPartidaNueva);
         frame.add(btnAyuda);
         frame.add(btnRanking);
+       
 
         // Mostrar la ventana
         frame.setVisible(true);	

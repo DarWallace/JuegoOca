@@ -5,7 +5,7 @@ public class Main
 	public static void main(String[] args)
 	{
 		Vista vista = new Vista();
-		ModeloT modelo = new ModeloT(); // Asegúrate de tener esta clase aunque esté vacía
+		ModeloB modelo = new ModeloB();
 		new Controlador(vista, modelo);
 	}
 }
