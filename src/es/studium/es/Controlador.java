@@ -121,22 +121,7 @@ public class Controlador implements ActionListener {
 		} else if (tableroJuego != null && e.getSource() == tableroJuego.btnTirarDados) {
 			int numJugadores = inicioPartida.getNumJugadores();
 			tableroJuego.moverCasilla();
-			if (tableroJuego.finJuego(tableroJuego.contadorCasillasJ1, tableroJuego.contadorCasillasJ2,
-					tableroJuego.contadorCasillasJ3, tableroJuego.contadorCasillasJ4)) {
-				connection = modelo.conectarB();
-				modelo.altaJugador(connection, tableroJuego.jugador1, tableroJuego.contadorTiradas1);
-				modelo.altaJugador(connection, tableroJuego.jugador2, tableroJuego.contadorTiradas2);
-				if (numJugadores >= 3) {
-				    modelo.altaJugador(connection, tableroJuego.jugador3, tableroJuego.contadorTiradas3);
-				}
-				if (numJugadores == 4) {
-				    modelo.altaJugador(connection, tableroJuego.jugador4, tableroJuego.contadorTiradas4);
-				}
-				modelo.desconectarB(connection);
-				JOptionPane.showMessageDialog(tableroJuego, "Fin del juego");
-				tableroJuego.dispose();
-				vista.frame.setVisible(true);
-			}
+//			
 			tableroJuego.avanzarTurno();
 			tableroJuego.actualizarLabelTurno();
 		} else if (tableroJuego != null && e.getSource() == tableroJuego.btnRehacer) {
@@ -179,7 +164,6 @@ public class Controlador implements ActionListener {
 
 				// Redibuja el tablero para reposicionar las fichas
 				tableroJuego.repaint();
-			} else {
 			}
 		}
 	}

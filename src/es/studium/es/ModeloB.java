@@ -70,7 +70,7 @@ public class ModeloB {
 		{
 			String contenidoTextarea = String.format("%-8s - %-10s - %-15s - %-4s\n", "Posición", "Nombre", "Fecha",
 					"Tiradas");
-			sentencia = "SELECT nombreJugador,date_format(fecha, '%d/%m/%Y') 'fechas',tiradas FROM ranking order by tiradas;";
+			sentencia = "SELECT nombreJugador,date_format(fecha, '%d/%m/%Y') 'fechas',tiradas FROM ranking order by tiradas, fecha LIMIT 10;";
 			try {
 				statement = conexion.createStatement();
 				guardarLog(sentencia);

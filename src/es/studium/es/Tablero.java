@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.sql.Connection;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -81,6 +82,7 @@ public class Tablero extends JFrame {
 
 	// NUEVO: Array para indicar el tipo de cada casilla
 	String[] tipoCasilla = new String[64];
+	Connection connection = null;
 
 	public Tablero(int n, String j1, String c1, String j2, String c2, String j3, String c3, String j4, String c4) {
 		numJugadores = n;
@@ -381,7 +383,28 @@ public class Tablero extends JFrame {
 			return 1;
 		case "meta":
 			JOptionPane.showMessageDialog(this, "¡Has llegado a la meta! ¡Victoria!");
-			return 63;
+			connection = modelo.conectarB();
+			switch (jugador){
+				case 1:
+					modelo.altaJugador(connection, jugador1, contadorTiradas1);
+					break;
+					
+				case 2:
+					modelo.altaJugador(connection, jugador2, contadorTiradas2);
+				break;
+				case 3:
+					modelo.altaJugador(connection, jugador3, contadorTiradas3);
+					break;
+				case 4:
+					modelo.altaJugador(connection, jugador4, contadorTiradas4);
+					break;
+			}
+			modelo.desconectarB(connection);
+			JOptionPane.showMessageDialog(this, "Fin del juego");
+				dispose();
+				Vista vista=new Vista();
+				vista.frame.setVisible(true);
+				
 		default:
 			return posicion;
 		}
@@ -448,9 +471,7 @@ public class Tablero extends JFrame {
 	    && intentos <= numJugadores);
 	}
 
-	public boolean finJuego(int contadorCasillaJ1, int contadorCasillaJ2, int contadorCasillaJ3, int contadorCasillaJ4) {
-		return (contadorCasillaJ1 == 63 && contadorCasillaJ2 == 63 && contadorCasillaJ3 == 63 && contadorCasillaJ4 == 63);
-	}
+	
 
 	// MODIFICADO: moverCasilla sin ningún avance de turno
 	public void moverCasilla() {
@@ -490,9 +511,10 @@ public class Tablero extends JFrame {
 				if (modelo.victoriaFallida(contadorCasillasJ1)) {
 					int casillasRetroceder = contadorCasillasJ1 - 63;
 					contadorCasillasJ1 = 63 - casillasRetroceder;
-				} else if (modelo.comprobarVictoria(contadorCasillasJ1)) {
-					aplicarReglaCasilla(contadorCasillasJ1, 1);
 				}
+//				else if (modelo.comprobarVictoria(contadorCasillasJ1)) {
+//					aplicarReglaCasilla(contadorCasillasJ1, 1);
+//				}
 				int nuevaPos = aplicarReglaCasilla(contadorCasillasJ1, 1);
 				caeEnOca = (tipoCasilla[nuevaPos].equals("oca") && nuevaPos != contadorCasillasJ1);
 				contadorCasillasJ1 = nuevaPos;
@@ -508,9 +530,10 @@ public class Tablero extends JFrame {
 				if (modelo.victoriaFallida(contadorCasillasJ2)) {
 					int casillasRetroceder = contadorCasillasJ2 - 63;
 					contadorCasillasJ2 = 63 - casillasRetroceder;
-				} else if (modelo.comprobarVictoria(contadorCasillasJ2)) {
-					aplicarReglaCasilla(contadorCasillasJ2, 2);
-				}
+				} 
+//				else if (modelo.comprobarVictoria(contadorCasillasJ2)) {
+//					aplicarReglaCasilla(contadorCasillasJ2, 2);
+//				}
 				int nuevaPos = aplicarReglaCasilla(contadorCasillasJ2, 2);
 				caeEnOca = (tipoCasilla[nuevaPos].equals("oca") && nuevaPos != contadorCasillasJ2);
 				contadorCasillasJ2 = nuevaPos;
@@ -526,9 +549,10 @@ public class Tablero extends JFrame {
 				if (modelo.victoriaFallida(contadorCasillasJ3)) {
 					int casillasRetroceder = contadorCasillasJ3 - 63;
 					contadorCasillasJ3 = 63 - casillasRetroceder;
-				} else if (modelo.comprobarVictoria(contadorCasillasJ3)) {
-					aplicarReglaCasilla(contadorCasillasJ3, 3);
-				}
+					} 
+//					else if (modelo.comprobarVictoria(contadorCasillasJ3)) {
+//					aplicarReglaCasilla(contadorCasillasJ3, 3);
+//				}
 				int nuevaPos = aplicarReglaCasilla(contadorCasillasJ3, 3);
 				caeEnOca = (tipoCasilla[nuevaPos].equals("oca") && nuevaPos != contadorCasillasJ3);
 				contadorCasillasJ3 = nuevaPos;
@@ -544,9 +568,10 @@ public class Tablero extends JFrame {
 				if (modelo.victoriaFallida(contadorCasillasJ4)) {
 					int casillasRetroceder = contadorCasillasJ4 - 63;
 					contadorCasillasJ4 = 63 - casillasRetroceder;
-				} else if (modelo.comprobarVictoria(contadorCasillasJ4)) {
-					aplicarReglaCasilla(contadorCasillasJ4, 4);
-				}
+				} 
+//					else if (modelo.comprobarVictoria(contadorCasillasJ4)) {
+//					aplicarReglaCasilla(contadorCasillasJ4, 4);
+//				}
 				int nuevaPos = aplicarReglaCasilla(contadorCasillasJ4, 4);
 				caeEnOca = (tipoCasilla[nuevaPos].equals("oca") && nuevaPos != contadorCasillasJ4);
 				contadorCasillasJ4 = nuevaPos;
