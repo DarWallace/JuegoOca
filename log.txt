@@ -16,3 +16,5 @@
 [14/06/2025][17:27:49.371] [INSERT INTO ranking VALUES (null,'Ter', CURDATE() ,10);]
 [14/06/2025][17:27:54.719] [INSERT INTO ranking VALUES (null,'Ter', CURDATE() ,10);]
 [14/06/2025][17:38:52.55] [INSERT INTO ranking VALUES (null,'Tur', CURDATE() ,13);]
+[16/06/2025][21:43:20.936] [INSERT INTO ranking VALUES (null,'gret', CURDATE() ,16);]
+[16/06/2025][21:43:41.862] [SELECT nombreJugador,date_format(fecha, '%d/%m/%Y') 'fechas',tiradas FROM ranking order by tiradas, fecha LIMIT 10;]

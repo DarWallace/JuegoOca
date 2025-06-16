@@ -386,16 +386,20 @@ public class Tablero extends JFrame {
 			connection = modelo.conectarB();
 			switch (jugador){
 				case 1:
+					
 					modelo.altaJugador(connection, jugador1, contadorTiradas1);
 					break;
 					
 				case 2:
+					
 					modelo.altaJugador(connection, jugador2, contadorTiradas2);
 				break;
 				case 3:
+					
 					modelo.altaJugador(connection, jugador3, contadorTiradas3);
 					break;
 				case 4:
+					
 					modelo.altaJugador(connection, jugador4, contadorTiradas4);
 					break;
 			}
