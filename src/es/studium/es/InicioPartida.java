@@ -97,7 +97,7 @@ public class InicioPartida extends JFrame {
 			c.gridx = 2;
 			panel.add(choiceColorJ4, c);
 		}
-		// Botón Jugar
+		// Botón para Jugar
 		c.gridy = 5;
 		c.gridx = 1;
 		panel.add(btnAceptar, c);

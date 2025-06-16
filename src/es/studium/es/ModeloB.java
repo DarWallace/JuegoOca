@@ -23,7 +23,7 @@ public class ModeloB {
 	Connection connection = null;
 	Statement statement = null;
 	ResultSet rs = null;
-	// Añadir este método en la clase ModeloB
+	
 
 	public Connection conectarB() {
 		try {

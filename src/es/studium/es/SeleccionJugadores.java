@@ -13,7 +13,7 @@ public class SeleccionJugadores extends JFrame
     Image backgroundImage = herramientas.getImage("img\\Copia de fondo.png");
     JButton btnVolver = new JButton("<--");
 
-    // Crear un panel para dibujar la imagen de fondo
+    
     
 
     public SeleccionJugadores()

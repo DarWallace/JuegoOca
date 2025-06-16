@@ -80,7 +80,7 @@ public class Tablero extends JFrame {
 
 	Point[] posicionesCasillas = new Point[64];
 
-	// NUEVO: Array para indicar el tipo de cada casilla
+	// Array para indicar el tipo de cada casilla
 	String[] tipoCasilla = new String[64];
 	Connection connection = null;
 
@@ -95,8 +95,8 @@ public class Tablero extends JFrame {
 		jugador4 = j4;
 		color4 = c4;
 
-		// Coordenadas tablero...
-		posicionesCasillas[0] = new Point(371, 684); // Salida
+		// Coordenadas tablero
+		posicionesCasillas[0] = new Point(371, 684); // no la usamos para que la casilla concida con el numero
 		posicionesCasillas[1] = new Point(568, 684);
 		posicionesCasillas[2] = new Point(736, 684);
 		posicionesCasillas[3] = new Point(805, 684);
@@ -164,7 +164,7 @@ public class Tablero extends JFrame {
 		// Imagen tablero
 		tablero = Toolkit.getDefaultToolkit().getImage("img\\tablero.png");
 
-		// Configuración ventana...
+		// Configuración ventana
 		setTitle("Juego de la Oca");
 		setSize(1720, 808);
 		setLocationRelativeTo(null);
@@ -206,11 +206,11 @@ public class Tablero extends JFrame {
 		panel.setLayout(null);
 
 		lblTurno.setBounds(1340, 60, 250, 30); // Ajusta la posición según necesites
-		lblTurno.setFont(lblTurno.getFont().deriveFont(18f)); // Fuente más grande opcional
+		lblTurno.setFont(lblTurno.getFont().deriveFont(18f)); // Fuente más grande 
 		lblTurno.setText("Turno de: " + obtenerNombreTurno());
 		panel.add(lblTurno);
 
-		// Tabla lateral...
+		// Tabla lateral
 		JPanel tablePanel = new JPanel(new GridLayout(1 + numJugadores, 4, 1, 1));
 		tablePanel.setBounds(1340, 100, 250, 250);
 		tablePanel.setBackground(new Color(255, 255, 204));
@@ -269,19 +269,19 @@ public class Tablero extends JFrame {
 
 		panelDado.setBounds(1415, 550, 300, 300); // Cambia la posición y el tamaño
 		lblDado.setBounds(0, 0, 200, 200); // Cambia el tamaño del dado
-		panelDado.setOpaque(false); // Para que sea transparente si lo necesitas
+		panelDado.setOpaque(false); // Para que sea transparente si lo necesitamos
 		lblDado.setIcon(new ImageIcon("img\\dado1.png"));
 		panelDado.add(lblDado);
 
-		// Añade el panelDado al tablero principal (suponiendo que tu tablero es un
-		// JPanel con layout null)
+		// Añade el panel del Dado al tablero principal 
+		
 		panel.add(panelDado);
 		add(panel);
 
 		// INICIALIZACIÓN tipos de casilla
 		for (int i = 0; i < tipoCasilla.length; i++)
 			tipoCasilla[i] = "normal";
-		// Ejemplo de configuración; ajusta según tus reglas:
+		// casillas especiales:
 		tipoCasilla[5] = "oca";
 		tipoCasilla[9] = "oca";
 		tipoCasilla[14] = "oca";
@@ -347,7 +347,7 @@ public class Tablero extends JFrame {
 		}
 	}
 
-	// NUEVO: Método para aplicar la lógica de cada casilla especial
+	// Método para aplicar la lógica de cada casilla especial
 	private int aplicarReglaCasilla(int posicion, int jugador) {
 		switch (tipoCasilla[posicion]) {
 		case "oca":
@@ -442,7 +442,7 @@ public class Tablero extends JFrame {
 		return desde;
 	}
 
-	// Lógica para perder turnos (puedes implementarla como prefieras)
+	// Lógica para perder turnos 
 	private void perderTurnos(int jugador, int cuantos) {
 		switch (jugador) {
 		case 1:
@@ -477,7 +477,7 @@ public class Tablero extends JFrame {
 
 	
 
-	// MODIFICADO: moverCasilla sin ningún avance de turno
+	//  moverCasilla sin ningún avance de turno
 	public void moverCasilla() {
 		if (turno == 1 && saltosJ1 > 0) {
 			saltosJ1--;
@@ -516,9 +516,7 @@ public class Tablero extends JFrame {
 					int casillasRetroceder = contadorCasillasJ1 - 63;
 					contadorCasillasJ1 = 63 - casillasRetroceder;
 				}
-//				else if (modelo.comprobarVictoria(contadorCasillasJ1)) {
-//					aplicarReglaCasilla(contadorCasillasJ1, 1);
-//				}
+		
 				int nuevaPos = aplicarReglaCasilla(contadorCasillasJ1, 1);
 				caeEnOca = (tipoCasilla[nuevaPos].equals("oca") && nuevaPos != contadorCasillasJ1);
 				contadorCasillasJ1 = nuevaPos;
@@ -535,9 +533,7 @@ public class Tablero extends JFrame {
 					int casillasRetroceder = contadorCasillasJ2 - 63;
 					contadorCasillasJ2 = 63 - casillasRetroceder;
 				} 
-//				else if (modelo.comprobarVictoria(contadorCasillasJ2)) {
-//					aplicarReglaCasilla(contadorCasillasJ2, 2);
-//				}
+
 				int nuevaPos = aplicarReglaCasilla(contadorCasillasJ2, 2);
 				caeEnOca = (tipoCasilla[nuevaPos].equals("oca") && nuevaPos != contadorCasillasJ2);
 				contadorCasillasJ2 = nuevaPos;
@@ -554,9 +550,7 @@ public class Tablero extends JFrame {
 					int casillasRetroceder = contadorCasillasJ3 - 63;
 					contadorCasillasJ3 = 63 - casillasRetroceder;
 					} 
-//					else if (modelo.comprobarVictoria(contadorCasillasJ3)) {
-//					aplicarReglaCasilla(contadorCasillasJ3, 3);
-//				}
+
 				int nuevaPos = aplicarReglaCasilla(contadorCasillasJ3, 3);
 				caeEnOca = (tipoCasilla[nuevaPos].equals("oca") && nuevaPos != contadorCasillasJ3);
 				contadorCasillasJ3 = nuevaPos;
@@ -573,9 +567,7 @@ public class Tablero extends JFrame {
 					int casillasRetroceder = contadorCasillasJ4 - 63;
 					contadorCasillasJ4 = 63 - casillasRetroceder;
 				} 
-//					else if (modelo.comprobarVictoria(contadorCasillasJ4)) {
-//					aplicarReglaCasilla(contadorCasillasJ4, 4);
-//				}
+
 				int nuevaPos = aplicarReglaCasilla(contadorCasillasJ4, 4);
 				caeEnOca = (tipoCasilla[nuevaPos].equals("oca") && nuevaPos != contadorCasillasJ4);
 				contadorCasillasJ4 = nuevaPos;
@@ -591,6 +583,6 @@ public class Tablero extends JFrame {
 		if (caeEnOca) {
 			moverCasilla();
 		}
-		// No hay avance de turno aquí; lo hará el controlador tras llamar a este método
+		
 	}
 }

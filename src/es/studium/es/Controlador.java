@@ -121,7 +121,6 @@ public class Controlador implements ActionListener {
 		} else if (tableroJuego != null && e.getSource() == tableroJuego.btnTirarDados) {
 			int numJugadores = inicioPartida.getNumJugadores();
 			tableroJuego.moverCasilla();
-//			
 			tableroJuego.avanzarTurno();
 			tableroJuego.actualizarLabelTurno();
 		} else if (tableroJuego != null && e.getSource() == tableroJuego.btnRehacer) {
